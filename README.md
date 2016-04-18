@@ -62,7 +62,7 @@ the [Echo API][echo] specs for details on handling unprivileged requests.
 Handling of invalid parameters
 ------------------------------
 
- * General [error handling rules][error-handling] apply. 
+ * General [error handling rules][error-handling] apply.
 
  * Invalid (uncovered) `hei_id` values MUST be ignored. Servers MUST return
    a valid (HTTP 200) XML response in such cases, but the response will simply
