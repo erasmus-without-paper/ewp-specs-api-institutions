@@ -52,6 +52,7 @@
                       - links to PDF documents (0..*, recommended)
                       - IRO website (0..1),
                       - Lots of various text fields from fact sheets
+                        E.g. https://studyabroad.hh.umu.se/utland/valj_universitylist.php?sort=country#
 
                         If this is supposed to work out then we'll need 2-5 sentences
                         of description for each of such fields. Who will be able to model
