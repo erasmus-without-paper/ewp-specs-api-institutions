@@ -27,20 +27,25 @@ Request method
 Request parameters
 ------------------
 
-Parameters MUST be provided either in a query string (for GET requests), or in
-the `application/x-www-form-urlencoded` format (for POST requests).
+Parameters MUST be provided in the regular `application/x-www-form-urlencoded`
+format.
 
 
 ### `hei_id` (repeatable, required)
 
-A list of institution identifiers.
+A list of institution identifiers (no more than `<max-hei-ids>` items) - IDs of
+HEIs the clients wants to retrieve information on.
 
-Clients may retrieve proper identifiers from the [Registry Service]
+This parameter is *repeatable*, so the request MAY contain multiple occurrences
+of it. The server is REQUIRED to process all of them.
+
+Server implementers provide their own chosen value of `<max-hei-ids>` via their
+manifest entry (see [manifest-entry.xsd](manifest-entry.xsd)). Clients SHOULD
+parse this value (or assume its equal to `1`).
+
+Clients may retrieve proper HEI identifiers from the [Registry Service]
 [registry-spec]. Servers MUST be able to accept all HEI IDs declared in their
 [manifest files][discovery-api].
-
-*Repeatable* means that the URL may contain multiple occurrences of this
-parameter, e.g. `hei_id=uw.edu.pl&hei_id=uj.edu.pl`.
 
 
 ### `include_iro_sections`
@@ -55,13 +60,11 @@ client wants them.
 Permissions
 -----------
 
- * All requests from the EWP Network MUST be allowed access to this API.
+ * All requests from the EWP Network MUST be allowed to access this API.
 
- * Additionally, it is RECOMMENDED to allow this API to be accessed by
-   **anonymous** external clients too (without the need of using a client
-   certificate). It is also RECOMMENDED that servers should include an
-   `Access-Control-Allow-Origin: *` header in their responses (so that
-   JavaScript applications will be able to use it without a proxy).
+ * Additionally, implementers MAY allow this API to be accessed by
+   **anonymous** external clients too (without the need of using any client
+   certificate).
 
 
 Handling of invalid parameters
@@ -69,10 +72,14 @@ Handling of invalid parameters
 
  * General [error handling rules][error-handling] apply.
 
- * Invalid (uncovered) `hei_id` values MUST be ignored. Servers MUST return
+ * Invalid (uncovered) `hei_id` values MUST be **ignored**. Servers MUST return
    a valid (HTTP 200) XML response in such cases, but the response will simply
-   not contain the information on the unknown `hei_id` values. (If all values
-   are unknown, servers will respond with an empty envelope.)
+   not contain the information on the unknown `hei_id` values. If all values
+   are unknown, servers MUST respond with an empty `<response>` element.
+   This requirement is true even when `<max-hei-ids>` is `1`.
+
+ * If the length of `hei_id` list is greater than `<max-hei-ids>`, servers
+   MUST respond with HTTP 400.
 
 
 Response
