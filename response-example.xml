@@ -22,6 +22,12 @@
         example has 3 components (although they are enclosed in a -ref element
         instead of an id, but logically it amounts to the same thing).
         -->
+        <!--
+        Wojtek's comment: I believe that your proposal is not compatible with XML
+        Schema 1.0 and tools such as JAXB. In WP4's schemas we tried to follow the rule
+        that "every element named <x/> must have exactly the same children requirements
+        as all its siblings named <x/>". I will explain this in Warsaw.
+         -->
         <id>
             <!-- Mandatory -->
             <institution-id>uio.no</institution-id>
@@ -175,6 +181,14 @@
               career services/info dissemination:
               Are these supposed to be text/description fields? In that case, I would suggest
               the usual type attribute.
+        -->
+        <!--
+        Wojtek's comment:
+        I still have the same opinion on this as I had back in Oslo. I think that most of
+        this stuff is - at this point in time - not important for electronic transfer, and
+        that it should be included *only* in PDF version of the Fact Sheet. I would include
+        only a couple of key elements in XML, such as email addresses and phone numbers,
+        along with the names of mobility coordinators.
         -->
         <departments>
             <organization-unit-id>fsat.no</organization-unit-id>
