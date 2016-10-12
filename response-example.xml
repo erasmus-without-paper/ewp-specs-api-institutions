@@ -28,6 +28,12 @@
         that "every element named <x/> must have exactly the same children requirements
         as all its siblings named <x/>". I will explain this in Warsaw.
          -->
+        <!--
+        Kai's comment: If I understand you correctly, that requirement would be met here:
+        On any given XML document level, there will be 1 <id/> and 0..* <other-id/>.
+        So <id/> never has siblings, and <other-id/> siblings always have the same
+        sub-elements (but different type attribute)?
+        -->
         <id>
             <!-- Mandatory -->
             <institution-id>uio.no</institution-id>
@@ -72,10 +78,6 @@
            has a type attribute ;-) with the code set postOfficeBoxAddress,
            streetAddress and militaryAddress. The first two correspond to
            "postal" and "visiting".
-
-        3. Another thing is the usage of case in code sets: Probably the
-           country code should be in lowercase ("no"), to correspond to the
-           corresponding lang attributes?
         -->
         <address type="postOfficeBoxAddress">
             <box>Boks 1072</box>
@@ -190,6 +192,18 @@
         only a couple of key elements in XML, such as email addresses and phone numbers,
         along with the names of mobility coordinators.
         -->
+        <!--
+        Kai's comment: Ok, something like this?
+        -->
+        <contacts>
+            <!-- Optional attribute -->
+            <contact type="housing">
+                <family-name>Person</family-name>
+                <given-names>Contact</given-names>
+                <email>contact.person@uio.no</email>
+                <phone>99999999</phone>
+            </contact>
+        </contacts>
         <departments>
             <organization-unit-id>fsat.no</organization-unit-id>
             <organization-unit-id>matnat.uio.no</organization-unit-id>
