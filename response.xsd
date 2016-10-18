@@ -1,37 +1,268 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema elementFormDefault="qualified" targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/master" xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/master" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:ewp="https://github.com/erasmus-without-paper/ewp-specs-architecture/blob/stable-v1/common-types.xsd"
+    xmlns:r="https://github.com/erasmus-without-paper/ewp-specs-api-registry/tree/stable-v1"
+    elementFormDefault="qualified"
+
+    targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/master"
+    xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/master"
+>
     <!-- WRTODO: Replace all occurrences of 'master' (in all projects) with 'stable-v1' upon release. -->
+
+    <xs:import
+        schemaLocation="https://raw.githubusercontent.com/erasmus-without-paper/ewp-specs-architecture/stable-v1/common-types.xsd"
+        namespace="https://github.com/erasmus-without-paper/ewp-specs-architecture/blob/stable-v1/common-types.xsd"
+    />
+
+    <xs:import
+        schemaLocation="../ewp-specs-api-registry/catalogue.xsd"
+        namespace="https://github.com/erasmus-without-paper/ewp-specs-api-registry/tree/stable-v1"
+    /> <!-- WRTODO: absolute paths! -->
+
+    <xs:import
+        schemaLocation="http://www.w3.org/2001/03/xml.xsd"
+        namespace="http://www.w3.org/XML/1998/namespace"
+    />
+
     <xs:annotation>
-        <xs:documentation>This schema is a part of the Erasmus Without Paper project. Before you start
+        <xs:documentation>
+            This schema is a part of the Erasmus Without Paper project. Before you start
             using it, make sure you have read the general rules described here:
 
-            http://developers.erasmuswithoutpaper.eu/</xs:documentation>
+            http://developers.erasmuswithoutpaper.eu/
+        </xs:documentation>
     </xs:annotation>
+
     <xs:element name="response">
         <xs:annotation>
-            <xs:documentation>This describes the format of the response returned by the EWP Institutions API.</xs:documentation>
+            <xs:documentation>
+                This describes the format of the response returned by the EWP Institutions API.
+            </xs:documentation>
         </xs:annotation>
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" name="institution">
+                <xs:element name="hei" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>
+                            This represents a single institution. Servers will produce one such element for
+                            each of the `hei_id` values passed in the Institutions API call.
+                        </xs:documentation>
+                    </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="name">
-                                <xs:complexType>
-                                    <xs:simpleContent>
-                                        <xs:extension base="xs:string">
-                                            <xs:attribute ref="xml:lang"/>
-                                        </xs:extension>
-                                    </xs:simpleContent>
-                                </xs:complexType>
+                            <xs:element name="hei-id" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        The SCHAC identifier of this HEI.
+                                        https://github.com/erasmus-without-paper/ewp-specs-api-registry/#schac-identifiers
+                                    </xs:documentation>
+                                </xs:annotation>
                             </xs:element>
-                            <xs:element name="country" type="xs:string"/>
-                            <xs:element name="url" type="xs:anyURI"/>
+                            <xs:element name="other-id" minOccurs="0" maxOccurs="unbounded" type="r:OtherHeiId">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        A collection of other HEI IDs. It is recommended for this set to be exactly
+                                        the same as the one provided to the Registry Service (via the manifest file).
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="name" minOccurs="1" maxOccurs="unbounded" type="ewp:StringWithOptionalLang">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        A collection of institution names, in different languages. It is recommended for
+                                        this set to be exactly the same as the one provided to the Registry Service (via
+                                        the manifest file).
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="street-address" minOccurs="0" maxOccurs="1" type="Address">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        The street address of the institution.
+
+                                        This is the address which should work when, for example, the user pastes it
+                                        into Google Maps. If this HEI has many campuses, then this address should refer
+                                        to a "main" campus. If this HEI doesn't have a "main" campus, then the address
+                                        may be either skipped, or limited to the name of the institution, a city, and a
+                                        country.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="mailing-address" minOccurs="0" maxOccurs="1" type="Address">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        The postal address of the institution. It MAY be the same as street-address,
+                                        but doesn't have to be (e.g. it can be a PO box).
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="website-url" minOccurs="0" maxOccurs="unbounded" type="HTTPWithOptionalLang">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Primary website of the institution.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="logo-url" minOccurs="0" maxOccurs="1" type="ewp:HTTPS">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        If given, this should be a HTTPS URL pointing to the institution's logo.
+                                        It does not necessarily have to be hosted on the same domain as the API
+                                        itself.
+
+                                        Preferably, this should be an SVG, PNG or JPEG file, in "squarish" (~1:1)
+                                        dimensions ratio, and a resolution suitable for both display and printing, on
+                                        white or transparent background, with no margins included (clients are advised
+                                        to add proper margins before the logo is displayed).
+
+                                        See resources/logo-examples directory for some examples of valid logos. You
+                                        will find it in the Institutions API specs page:
+
+                                        https://github.com/erasmus-without-paper/ewp-specs-api-institutions
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                         </xs:sequence>
-                        <xs:attribute name="id" type="xs:string" use="optional"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <!-- WRTODO: Move this to ewp: namespace. -->
+    <xs:complexType name="Address">
+        <xs:annotation>
+            <xs:documentation>
+                This type defines an address. It can be used for postal/mailing address,
+                or for street/physical address, or both, depending on context.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <!--
+            WRTODO: I no longer think this one is necessary. To be removed.
+            <xs:element name="preformatted" minOccurs="0" maxOccurs="unbounded" type="ewp:MultilineStringWithOptionalLang">
+                <xs:annotation>
+                    <xs:documentation>
+                        A *multiline* string containing the address in a pre-formatted form. If given,
+                        then it contains the address formatted in the same way, as the *server
+                        developer* would display it. It is possible to have multiple formatted versions
+                        of a single address, in different languages.
+
+                        Server implementers SHOULD provide this element if they have problems encoding
+                        the address in the way imposed by the other Address subelements. They
+                        MAY also provide this element as a supplement to all the other subelements.
+
+                        Client implementers SHOULD use this element as a fallback if none of the other
+                        Address subelements are present.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            -->
+            <xs:element name="addressLine" minOccurs="1" maxOccurs="4" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        There are many valid options here. These fields (there can be as much as 4 of
+                        them) may contain street name, building number, the name of the addressed
+                        entity (e.g. the name of the faculty, or a person), a post-office box number,
+                        etc.
+
+                        Server developers SHOULD attempt to provide this data in a form of multiple
+                        addressLine elements, but they are also allowed to have it all in a single
+                        line (e.g. comma-separated).
+
+                        Client developers MAY combine the lines with commas, if their databases do not
+                        allow them to store 4 address lines.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="locality" minOccurs="1" maxOccurs="1" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        The name of the settlement (city/town/village). Both postal and map localities
+                        are allowed.
+
+                        If this address is supposed to be postal address, then it is recommended to use
+                        a postal locality here (postal authority often situated in a nearby large town).
+                        Note however, that a map locality is also acceptable, as the postal code will
+                        usually resolve any problems here, to allow correct delivery even if the
+                        official postal locality is not used.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="region" minOccurs="0" maxOccurs="1" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        An optional name of the region. Usually not used in most countries, it can be any
+                        kind of administrative or postal division (such as state, province, voivodeship,
+                        etc.)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="postalCode" minOccurs="0" maxOccurs="1" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        The postal code. This is often (but not always) required if the address is
+                        supposed to be the postal address. It may include dashes and other formatting
+                        characters. Note, that in some countries it can be as long as 10 characters.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="country" minOccurs="1" maxOccurs="1" type="CountryCode"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- WRTODO: Move this to ewp: namespace. -->
+    <xs:simpleType name="CountryCode">
+        <xs:annotation>
+            <xs:documentation>
+                ISO 3166-1 alpha-2 country code. These codes always have exactly 2 *upper-case*
+                letters (this differentiates them from *language* ISO codes, which are
+                lower-case.)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z][A-Z]"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- WRTODO: Move this to ewp: namespace. -->
+    <xs:simpleType name="HTTP">
+        <xs:annotation>
+            <xs:documentation>
+                An absolute URL. Might be both HTTP and HTTPS.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:anyURI">
+            <xs:pattern value="https?://.+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- WRTODO: Move this to ewp: namespace. -->
+    <xs:complexType name="HTTPWithOptionalLang">
+        <xs:annotation>
+            <xs:documentation>
+                An absolute URL with an optional xml:lang attribute.
+
+                This type is used in places where a single website can be provided in multiple
+                language versions. However, as a general rule, if the website can correctly
+                auto-detect client browser's preferred language, then server implementers
+                SHOULD supply this element only once, and *without* the xml:lang attribute.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="HTTP">
+                <xs:attribute ref="xml:lang" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>
+                            If given, it contains the language code the client should expect the website
+                            content to be in.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
 </xs:schema>
