@@ -1,4 +1,4 @@
-<response
+<institutions-response
     xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/master"
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -179,4 +179,4 @@
             <expenses type="other">300</expenses>
         </iro>
     </hei>
-</response>
+</institutions-response>
