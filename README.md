@@ -34,7 +34,7 @@ format.
 ### `hei_id` (repeatable, required)
 
 A list of institution identifiers (no more than `<max-hei-ids>` items) - IDs of
-HEIs the clients wants to retrieve information on.
+HEIs the client wants to retrieve information on.
 
 This parameter is *repeatable*, so the request MAY contain multiple occurrences
 of it. The server is REQUIRED to process all of them.
@@ -49,6 +49,8 @@ Clients may retrieve proper HEI identifiers from the [Registry Service]
 
 
 ### `include_iro_sections`
+
+WRTODO: This parameter will probably be removed.
 
 Optional. Boolean (either `true` or `false`). Default value: `false`.
 
@@ -76,7 +78,7 @@ Handling of invalid parameters
    a valid (HTTP 200) XML response in such cases, but the response will simply
    not contain the information on the unknown `hei_id` values. If all values
    are unknown, servers MUST respond with an empty `<response>` element.
-   This requirement is true even when `<max-hei-ids>` is `1`.
+   This requirement is true even when `<max-hei-ids>` is equal to `1`.
 
  * If the length of `hei_id` list is greater than `<max-hei-ids>`, servers
    MUST respond with HTTP 400.
