@@ -91,8 +91,8 @@ Servers MUST respond with a valid XML document described by the [response.xsd]
 (response.xsd) schema. See the schema annotations for further information.
 
 
-Data model entities involved in the response
---------------------------------------------
+Related data model entities
+---------------------------
 
  * Inst/Org Unit
  * Coordinator

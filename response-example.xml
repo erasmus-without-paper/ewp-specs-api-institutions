@@ -1,5 +1,8 @@
 <institutions-response
     xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/master"
+    xmlns:a="https://github.com/erasmus-without-paper/ewp-specs-types-address/tree/master"
+    xmlns:p="https://github.com/erasmus-without-paper/ewp-specs-types-phonenumber/tree/master"
+    xmlns:trm="https://github.com/erasmus-without-paper/ewp-specs-types-academic-term/tree/master"
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
@@ -8,109 +11,100 @@
     "
 >
     <!-- WRTODO: Make schemaLocation absolute -->
+
     <!--
     IMPORTANT: Please see the response.xsd file for detailed requirements and
     descriptions of all the elements. You MUST NOT base your implementation
     solely on the example file.
     -->
     <hei>
+        <!-- Identifiers (same as in the Manifest). -->
         <hei-id>uio.no</hei-id>
         <other-id type="erasmus">N Oslo01</other-id>
-        <!-- Optional -->
         <other-id type="local">UIO</other-id>
+
+        <!-- Primary attributes (name, website, logo, etc.) -->
         <name xml:lang="en">University of Oslo</name>
         <name xml:lang="no">Universitetet i Oslo</name>
-        <!-- Kai's address suggestion: -->
-        <address type="postOfficeBoxAddress">
-            <box>Boks 1072</box>
-            <city>Oslo</city>
-            <post-code>0316</post-code>
-        </address>
-        <!-- Wojtek's address suggestion: -->
-        <street-address>
-            <addressLine>University of Oslo</addressLine>
-            <locality>Oslo</locality>
-            <country>NO</country>
-        </street-address>
-        <mailing-address>
-            <addressLine>Boks 1072</addressLine>
-            <locality>Oslo</locality>
-            <postalCode>0316</postalCode>
-            <country>NO</country>
-        </mailing-address>
-        <country>NO</country>
-        <description xml:lang="en">Blah blah</description>
-        <!-- Optional -->
-        <description xml:lang="no">Bla bla</description>
-        <phone type="housing">12345678</phone>
-        <fax type="housing">87654321</fax>
-        <email type="housing">innkvartering@uio.no</email>
-        <email type="visa">visum@uio.no</email>
-        <!-- Optional? -->
-        <phone type="housing">12345678</phone>
-        <!-- Optional? -->
-        <fax type="housing">87654321</fax>
-        <!-- Kai's URL suggestion: -->
-        <url xml:lang="no" type="administrative">http://www.uio.no</url>
-        <url xml:lang="en" type="administrative">http://www.uio.no/en</url>
-        <url xml:lang="no" type="housing">http://www.uio.no/innkvartering</url>
-        <url xml:lang="no" type="insurance">http://www.uio.no/forsikring</url>
-        <url xml:lang="no" type="visa">http://www.uio.no/visum</url>
-        <url xml:lang="en" type="iro">http://www.uio.no/iro/en</url>
-        <url type="logo">http://www.uio.no/logo.jpg</url>
-        <!-- Wojtek's URL suggestion: -->
+        <a:street-address>
+            <a:addressLine>University of Oslo</a:addressLine>
+            <a:locality>Oslo</a:locality>
+            <a:country>NO</a:country>
+        </a:street-address>
+        <a:mailing-address>
+            <!--
+            Note: You will find more address-type examples here:
+            https://github.com/erasmus-without-paper/ewp-specs-types-address/
+            -->
+            <a:postOfficeBox>1072</a:postOfficeBox>
+            <a:postalCode>0316</a:postalCode>
+            <a:locality>Oslo</a:locality>
+            <a:country>NO</a:country>
+        </a:mailing-address>
         <website-url xml:lang="no">http://www.uio.no/</website-url>
         <website-url xml:lang="en">http://www.uio.no/english/</website-url>
         <logo-url>https://titan.uio.no/sites/all/themes/titan/img/uiologo.svg</logo-url>
-        <!-- Wojtek's comment: Elements above this line has been already described in the schema. -->
-        <!-- Kai's comment: The schema will change with input from the example, among other things. -->
-        <!-- Wojtek's comment: Elements below are still waiting to be "processed". -->
-        <!-- Kai's comments:
-        Can an institution participate in EWP without using ECTS?
-        I leave the coding of this element (Boolean or otherwise) to the group.
-        -->
-        <use-ects>true</use-ects>
-        <!-- Optional set of coordinators with different roles -->
-        <coordinator role="housing">
-            <family-name>Person</family-name>
-            <given-names>Contact</given-names>
-            <email>contact.person@uio.no</email>
-            <phone>99999999</phone>
-        </coordinator>
-        <url xml:lang="en" type="iro">http://www.uio.no/iro/en</url>
-        <!-- Optional? -->
-        <euc-no>12345</euc-no>
-        <academic-year>
-            <year-name>2016/2017</year-name>
-            <academic-term>
-                <term-name>HØST</term-name>
-                <title xml:lang="en-us">Fall</title>
-                <title xml:lang="no">Høst</title>
-                <start-date>2016-07-01</start-date>
-                <end-date>2016-12-31</end-date>
-            </academic-term>
-            <academic-term>
-                <term-name>VÅR</term-name>
-                <title xml:lang="en-us">Spring</title>
-                <title xml:lang="no">Vår</title>
-                <start-date>2017-01-01</start-date>
-                <end-date>2017-06-30</end-date>
-            </academic-term>
-        </academic-year>
-        <departments>
-            <organization-unit-id>fsat.no</organization-unit-id>
-            <organization-unit-id>matnat.uio.no</organization-unit-id>
-            <organization-unit-id>hf.uio.no</organization-unit-id>
-        </departments>
-        <!-- Kai's comment:
-        This is just a sketch with input from an earlier comment - to be elaborated (or dropped):
-        https://github.com/erasmus-without-paper/ewp-specs-api-institutions/commit/47b878d33e143da8501f7ba0d515b336837e16d5#diff-5bfd1cf6e5fb6f8e73184c993ebaf72bR30
-        If included in the format, it should probably contain some of the above elements
-        -->
-        <iro>
-            <expenses type="living">500</expenses>
-            <expenses type="academic">200</expenses>
-            <expenses type="other">300</expenses>
-        </iro>
+
+        <!-- Mobility factsheet. -->
+        <mobility-factsheet-url xml:lang="en">http://www.uio.no/english/studies/new-student/</mobility-factsheet-url>
+        <mobility-factsheet-url xml:lang="en">http://example.com/factsheet.pdf</mobility-factsheet-url>
+        <embedded-mobility-factsheet xml:lang="en">
+            <nestable-text-section>
+                <section-title>Useful links</section-title>
+                <text-content>Multiline plaintext.</text-content>
+            </nestable-text-section>
+            <nestable-text-section>
+                <section-title>Housing</section-title>
+                <text-content>Multiline plaintext.</text-content>
+            </nestable-text-section>
+            <nestable-text-section>
+                <section-title>Section with subsections</section-title>
+                <nestable-text-section>
+                    <section-title>Subsection 1</section-title>
+                    <text-content>Multiline plaintext.</text-content>
+                </nestable-text-section>
+                <nestable-text-section>
+                    <section-title>Subsection 2</section-title>
+                    <text-content>Multiline plaintext.</text-content>
+                </nestable-text-section>
+            </nestable-text-section>
+        </embedded-mobility-factsheet>
+
+        <!-- Contacts section. -->
+        <contact>
+            <!-- A minimal example. -->
+            <contact-name>IRO Office</contact-name>
+            <email>iro@uio.no</email>
+        </contact>
+        <contact>
+            <!-- More detailed example. -->
+            <contact-name>John Doe</contact-name>
+            <p:phone-number>
+                <p:e164>+4723456789</p:e164>
+            </p:phone-number>
+            <p:phone-number>
+                <p:e164>+4722222222</p:e164>
+                <p:ext>3407</p:ext>
+            </p:phone-number>
+            <p:fax-number>
+                <p:other-format>(23) 456789</p:other-format> <!-- discouraged -->
+            </p:fax-number>
+            <email>john@uio.no</email>
+            <a:street-address> <!-- As described before. --> </a:street-address>
+            <a:mailing-address> <!-- As described before. --> </a:mailing-address>
+            <role-description xml:lang="en">
+                John Doe is advising incoming students in regard to visas and insurance.
+
+                (This field may also contain other information, which is not present in the
+                model itself, e.g. calling hours.)
+            </role-description>
+            <role-id>mobility-visas</role-id>
+            <role-id>mobility-insurance</role-id>
+        </contact>
+
+        <!-- List of department IDs. -->
+        <unit-id>fsat.no</unit-id>
+        <unit-id>matnat.uio.no</unit-id>
+        <unit-id>hf.uio.no</unit-id>
     </hei>
 </institutions-response>

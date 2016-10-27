@@ -2,8 +2,11 @@
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:a="https://github.com/erasmus-without-paper/ewp-specs-types-address/tree/master"
+    xmlns:p="https://github.com/erasmus-without-paper/ewp-specs-types-phonenumber/tree/master"
     xmlns:ewp="https://github.com/erasmus-without-paper/ewp-specs-architecture/blob/stable-v1/common-types.xsd"
     xmlns:r="https://github.com/erasmus-without-paper/ewp-specs-api-registry/tree/stable-v1"
+    xmlns:trm="https://github.com/erasmus-without-paper/ewp-specs-types-academic-term/tree/master"
     elementFormDefault="qualified"
 
     targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/master"
@@ -19,6 +22,21 @@
     <xs:import
         schemaLocation="../ewp-specs-api-registry/catalogue.xsd"
         namespace="https://github.com/erasmus-without-paper/ewp-specs-api-registry/tree/stable-v1"
+    /> <!-- WRTODO: absolute paths! -->
+
+    <xs:import
+        schemaLocation="../ewp-specs-types-address/schema.xsd"
+        namespace="https://github.com/erasmus-without-paper/ewp-specs-types-address/tree/master"
+    /> <!-- WRTODO: absolute paths! -->
+
+    <xs:import
+        schemaLocation="../ewp-specs-types-phonenumber/schema.xsd"
+        namespace="https://github.com/erasmus-without-paper/ewp-specs-types-phonenumber/tree/master"
+    /> <!-- WRTODO: absolute paths! -->
+
+    <xs:import
+        schemaLocation="../ewp-specs-types-academic-term/schema.xsd"
+        namespace="https://github.com/erasmus-without-paper/ewp-specs-types-academic-term/tree/master"
     /> <!-- WRTODO: absolute paths! -->
 
     <xs:import
@@ -77,7 +95,7 @@
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="street-address" minOccurs="0" maxOccurs="1" type="Address">
+                            <xs:element ref="a:street-address" minOccurs="0" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation>
                                         The street address of the institution.
@@ -87,18 +105,24 @@
                                         to a "main" campus. If this HEI doesn't have a "main" campus, then the address
                                         may be either skipped, or limited to the name of the institution, a city, and a
                                         country.
+
+                                        This is the primary address. Note, that more addresses may be provided by using
+                                        the "contact" element.
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="mailing-address" minOccurs="0" maxOccurs="1" type="Address">
+                            <xs:element ref="a:mailing-address" minOccurs="0" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation>
                                         The postal address of the institution. It MAY be the same as street-address,
                                         but doesn't have to be (e.g. it can be a PO box).
+
+                                        This is the primary address. Note, that more addresses may be provided by using
+                                        the "contact" element.
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="website-url" minOccurs="0" maxOccurs="unbounded" type="HTTPWithOptionalLang">
+                            <xs:element name="website-url" minOccurs="0" maxOccurs="unbounded" type="ewp:HTTPWithOptionalLang">
                                 <xs:annotation>
                                     <xs:documentation>
                                         Primary website of the institution.
@@ -124,6 +148,241 @@
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <xs:element name="mobility-factsheet-url" minOccurs="0" maxOccurs="unbounded" type="ewp:HTTPWithOptionalLang">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        This URL is the most important one for the incoming students (much more
+                                        important than website-url above). Server developers SHOULD provide it (and
+                                        keep it updated). The URL SHOULD be publicly accessible (as opposed to being
+                                        accessible for EWP Network requesters only).
+
+                                        It SHOULD refer to either a PDF file, or a HTML website, or both (via two
+                                        separate factsheet-url elements). Other formats are also permitted, but
+                                        discouraged (discuss here:
+                                        https://github.com/erasmus-without-paper/ewp-specs-api-institutions/issues/3).
+                                        The document should contain all information the incoming student should know
+                                        before he applies for the mobility on this HEI. (Note, that this information is
+                                        NOT connected to any specific IIAs - this is an introductory document and its
+                                        scope is very broad; it is designed to be of use to *any* incoming student.)
+
+                                        Elements SHOULD have an xml:lang attribute, and at least one URL should refer
+                                        to a factsheet written in English.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="embedded-mobility-factsheet" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        In addition to providing factsheet-url(s), server developers MAY provide the
+                                        same factsheet information in a digitized format. It can be exactly the same
+                                        information as the one presented on the factsheet pages, or a subset of it.
+                                        However, if server developers decide to provide this additional sections here,
+                                        then they SHOULD keep them updated. (It's better to provide none, than to have
+                                        stale information here!)
+
+                                        This additional information is provided as a sequence of nestable text sections
+                                        (please consult its documentation for details). Currently we do not impose any
+                                        restrictions, nor requirements here. It is entirely up to the server developer
+                                        to decide how to split the information into useful sections. For example, one
+                                        HEI may decide that it will have only a single "Useful links" section, while
+                                        some other HEI may have separate sections for each topic like "Housing" or
+                                        "Insurance", and yet another may briefly describe all its IIAs in separate
+                                        sections.
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:group ref="nestable-text-sections"/>
+                                    </xs:sequence>
+                                    <xs:attribute ref="xml:lang" use="optional">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                The language in which the content of the sections is provided.
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="contact" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        A list of important contacts - phones, emails, addresses.
+
+                                        In context of EWP, this will most often be mobility-related contacts, but it's
+                                        not a rule. This means that server developers MAY choose to include all other
+                                        kinds of contacts here (such as, for example, the phone number and address of
+                                        the Institution's Library). Such contacts SHOULD however come after the "more
+                                        important" ones.
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="contact-name" minOccurs="1" maxOccurs="unbounded" type="ewp:StringWithOptionalLang">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    The name of the contact, e.g. "John Doe", or "IRO Office", or "John Doe (Head
+                                                    of the IRO Office)". This name MAY refer to a specific person, but it also may
+                                                    refer to a place, a role, etc. It just should be descriptive for the reader.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element ref="p:phone-number" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    A list of phone numbers at which you can reach this contact.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element ref="p:fax-number" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    A list of fax numbers at which you can reach this contact.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="email" minOccurs="0" maxOccurs="unbounded" type="ewp:Email">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    A list of email addresses at which you can reach this contact.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element ref="a:street-address" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Street address of the place when the contact can be found (room number, floor,
+                                                    etc.)
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element ref="a:mailing-address" minOccurs="0" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    A postal address at which you should send paper documents to this contact.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="role-description" minOccurs="0" maxOccurs="unbounded" type="ewp:MultilineStringWithOptionalLang">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    RECOMMENDED. Description of the "roles" of this contact, provided in multiple
+                                                    languages. It MAY be quite long (multiple paragraphs). It MAY autogenerated
+                                                    from the computer system, but it also MAY be provided by the contact himself.
+
+                                                    This description should answer the following question: "When this person/office
+                                                    should be contacted?". Client developers may, for example, display this
+                                                    information in a tooltip, next to the contact name.
+
+                                                    In more technical terms: it is a denormalized, human-readable representation of
+                                                    both role-id and iia-id lists described below, but it covers much more possible
+                                                    use cases (which can be very useful when no matching role-id can be found in
+                                                    EWPs enumeration).
+
+                                                    Examples:
+                                                    "Responsible for handling incoming students from Spain."
+                                                    "Dear students! Don't hesitate to contact me directly if..."
+                                                    "Responsible for handling Interinstitutional Agreements with Norway and Sweden."
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="role-id" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    An optional list of roles assigned for this contact. This list might be used by
+                                                    the clients to filter out contacts in specific contexts. (For example, client
+                                                    developer will be able to display for the student the proper contact details of
+                                                    a coordinator responsible for his particular mobility.)
+
+                                                    Server developers SHOULD NOT assign role IDs "forcefully". If the description
+                                                    of the role doesn't *really* match the true role of this contact, then it's
+                                                    better to *not* assign it. Provide a better role-description instead.
+
+                                                    Client developers MUST be prepared for this list to be expanded in the future.
+                                                    (Probably you should simply ignore unknown enumeration values.)
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration value="mobility-course-catalogue">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                This person (or office) may be contacted in regard to the content of the Course
+                                                                Catalogue (its courses and programmes).
+
+                                                                For example, client developers may display this contact next to a description
+                                                                of a course.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="mobility-housing">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                A person (or office) responsible for housing new incoming students.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="mobility-insurance">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                A person (or office) responsible for advising incoming students in regard to
+                                                                insurance.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="mobility-visas">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                A person (or office) responsible for advising incoming students in regard to
+                                                                visas.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="mobility-iias">
+                                                        <!--
+                                                        WRTODO: Not sure if this once is really needed, discuss here:
+                                                        https://github.com/erasmus-without-paper/ewp-wp3-data-model/issues/5
+                                                        -->
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                A contact in charge of IIAs.
+
+                                                                If this role is used without any iia-id elements present below, then this
+                                                                contact is responsible for *all* IIAs (which have no other assigned contact of
+                                                                their own). If there are specific IIA IDs listed below, then this contact is
+                                                                responsible for the mentioned IIAs only.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="iia-id" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+                                            <!--
+                                            WRTODO: Not sure if this once is really needed, discuss here:
+                                            https://github.com/erasmus-without-paper/ewp-wp3-data-model/issues/5
+                                            -->
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    A list of IDs of Interinstitutional Agreements this contact is responsible for
+                                                    handling.
+
+                                                    This is the place where you can assign coordinators to particular IIAs, as
+                                                    discussed here:
+                                                    https://github.com/erasmus-without-paper/ewp-wp3-data-model/issues/5#issuecomment-255537764
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="unit-id" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        A list of IDs of all departments. Clients can fetch more information on these
+                                        via the Departments API (WRTODO: Soon to be renamed.)
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -131,138 +390,60 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- WRTODO: Move this to ewp: namespace. -->
-    <xs:complexType name="Address">
-        <xs:annotation>
-            <xs:documentation>
-                This type defines an address. It can be used for postal/mailing address,
-                or for street/physical address, or both, depending on context.
-            </xs:documentation>
-        </xs:annotation>
+    <!-- WRTODO: Move to ewp: namespace? -->
+    <xs:group name="nestable-text-sections">
         <xs:sequence>
-            <!--
-            WRTODO: I no longer think this one is necessary. To be removed.
-            <xs:element name="preformatted" minOccurs="0" maxOccurs="unbounded" type="ewp:MultilineStringWithOptionalLang">
-                <xs:annotation>
-                    <xs:documentation>
-                        A *multiline* string containing the address in a pre-formatted form. If given,
-                        then it contains the address formatted in the same way, as the *server
-                        developer* would display it. It is possible to have multiple formatted versions
-                        of a single address, in different languages.
-
-                        Server implementers SHOULD provide this element if they have problems encoding
-                        the address in the way imposed by the other Address subelements. They
-                        MAY also provide this element as a supplement to all the other subelements.
-
-                        Client implementers SHOULD use this element as a fallback if none of the other
-                        Address subelements are present.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            -->
-            <xs:element name="addressLine" minOccurs="1" maxOccurs="4" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation>
-                        There are many valid options here. These fields (there can be as much as 4 of
-                        them) may contain street name, building number, the name of the addressed
-                        entity (e.g. the name of the faculty, or a person), a post-office box number,
-                        etc.
-
-                        Server developers SHOULD attempt to provide this data in a form of multiple
-                        addressLine elements, but they are also allowed to have it all in a single
-                        line (e.g. comma-separated).
-
-                        Client developers MAY combine the lines with commas, if their databases do not
-                        allow them to store 4 address lines.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="locality" minOccurs="1" maxOccurs="1" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation>
-                        The name of the settlement (city/town/village). Both postal and map localities
-                        are allowed.
-
-                        If this address is supposed to be postal address, then it is recommended to use
-                        a postal locality here (postal authority often situated in a nearby large town).
-                        Note however, that a map locality is also acceptable, as the postal code will
-                        usually resolve any problems here, to allow correct delivery even if the
-                        official postal locality is not used.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="region" minOccurs="0" maxOccurs="1" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation>
-                        An optional name of the region. Usually not used in most countries, it can be any
-                        kind of administrative or postal division (such as state, province, voivodeship,
-                        etc.)
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="postalCode" minOccurs="0" maxOccurs="1" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation>
-                        The postal code. This is often (but not always) required if the address is
-                        supposed to be the postal address. It may include dashes and other formatting
-                        characters. Note, that in some countries it can be as long as 10 characters.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="country" minOccurs="1" maxOccurs="1" type="CountryCode"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <!-- WRTODO: Move this to ewp: namespace. -->
-    <xs:simpleType name="CountryCode">
-        <xs:annotation>
-            <xs:documentation>
-                ISO 3166-1 alpha-2 country code. These codes always have exactly 2 *upper-case*
-                letters (this differentiates them from *language* ISO codes, which are
-                lower-case.)
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:pattern value="[A-Z][A-Z]"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <!-- WRTODO: Move this to ewp: namespace. -->
-    <xs:simpleType name="HTTP">
-        <xs:annotation>
-            <xs:documentation>
-                An absolute URL. Might be both HTTP and HTTPS.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:anyURI">
-            <xs:pattern value="https?://.+"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <!-- WRTODO: Move this to ewp: namespace. -->
-    <xs:complexType name="HTTPWithOptionalLang">
-        <xs:annotation>
-            <xs:documentation>
-                An absolute URL with an optional xml:lang attribute.
-
-                This type is used in places where a single website can be provided in multiple
-                language versions. However, as a general rule, if the website can correctly
-                auto-detect client browser's preferred language, then server implementers
-                SHOULD supply this element only once, and *without* the xml:lang attribute.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:simpleContent>
-            <xs:extension base="HTTP">
-                <xs:attribute ref="xml:lang" use="optional">
+            <xs:element name="nestable-text-section" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
                     <xs:annotation>
                         <xs:documentation>
-                            If given, it contains the language code the client should expect the website
-                            content to be in.
+                            A section with a title, text content *and subsections* (which allows is to
+                            contain a tree-like structure).
+
+                            Please note that this type DOES NOT allow the usage of xml:lang attribute.
+                            This means that you'll usually want to wrap it in some other element which
+                            makes use of xml:lang, so that all sections "inherit" the wrappers language.
                         </xs:documentation>
                     </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="section-title" minOccurs="1" maxOccurs="1" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Plaintext title of this section. It should be relatively short, e.g. "Useful
+                                    links".
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="text-content" minOccurs="0" maxOccurs="1" type="ewp:MultilineString">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The plaintext content of the section. Note, that it has the type of
+                                    ewp:MultilineString, so it may contain multiple paragraphs.
+
+                                    Usually a single section will have either text content OR subsections, but it
+                                    is also allowed to have *both* content and subsections. In the latter case,
+                                    the content is to be dispayed before the subsections.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:group ref="nestable-text-sections">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The list of subsections of this section.
+
+                                    This schema does not put a strict limit on the depth of the created tree-like
+                                    structure, but server developers SHOULD try to keep this depth on a reasonable
+                                    level. In most cases 2 or 3 levels should be enough. Client developers MAY
+                                    "flatten" the sections which they deem to be "too deep" (for example, they may
+                                    choose to display their headers as paragraphs instead of using &lt;h4&gt; or
+                                    &lt;h5&gt; headers).
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:group>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
 
 </xs:schema>
