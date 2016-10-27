@@ -106,5 +106,16 @@
         <unit-id>fsat.no</unit-id>
         <unit-id>matnat.uio.no</unit-id>
         <unit-id>hf.uio.no</unit-id>
+
+        <!-- WRTODO: This needs explanation. -->
+        <relevant-academic-terms>
+            <trm:academic-term>
+                <trm:academic-year-id>2010/2011</trm:academic-year-id>
+                <trm:display-name xml:lang="en">Winter Trimester 2010/2011</trm:display-name>
+                <trm:display-name xml:lang="pl">Drugi Trymestr 2010/2011</trm:display-name>
+                <trm:start-date>2010-12-01</trm:start-date>
+                <trm:end-date>2011-03-15</trm:end-date>
+            </trm:academic-term>
+        </relevant-academic-terms>
     </hei>
 </institutions-response>
