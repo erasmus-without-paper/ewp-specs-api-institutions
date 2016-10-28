@@ -48,17 +48,6 @@ Clients may retrieve proper HEI identifiers from the [Registry Service]
 [manifest files][discovery-api].
 
 
-### `include_iro_sections`
-
-WRTODO: This parameter will probably be removed.
-
-Optional. Boolean (either `true` or `false`). Default value: `false`.
-
-Indicates if the requester wants the server to include the IRO section in the
-response. These sections can be quite big, so we will send them only when the
-client wants them.
-
-
 Permissions
 -----------
 
