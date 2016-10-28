@@ -170,39 +170,6 @@
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="embedded-mobility-factsheet" minOccurs="0" maxOccurs="unbounded">
-                                <xs:annotation>
-                                    <xs:documentation>
-                                        In addition to providing factsheet-url(s), server developers MAY provide the
-                                        same factsheet information in a digitized format. It can be exactly the same
-                                        information as the one presented on the factsheet pages, or a subset of it.
-                                        However, if server developers decide to provide this additional sections here,
-                                        then they SHOULD keep them updated. (It's better to provide none, than to have
-                                        stale information here!)
-
-                                        This additional information is provided as a sequence of nestable text sections
-                                        (please consult its documentation for details). Currently we do not impose any
-                                        restrictions, nor requirements here. It is entirely up to the server developer
-                                        to decide how to split the information into useful sections. For example, one
-                                        HEI may decide that it will have only a single "Useful links" section, while
-                                        some other HEI may have separate sections for each topic like "Housing" or
-                                        "Insurance", and yet another may briefly describe all its IIAs in separate
-                                        sections.
-                                    </xs:documentation>
-                                </xs:annotation>
-                                <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:group ref="nestable-text-sections"/>
-                                    </xs:sequence>
-                                    <xs:attribute ref="xml:lang" use="optional">
-                                        <xs:annotation>
-                                            <xs:documentation>
-                                                The language in which the content of the sections is provided.
-                                            </xs:documentation>
-                                        </xs:annotation>
-                                    </xs:attribute>
-                                </xs:complexType>
-                            </xs:element>
                             <xs:element name="contact" minOccurs="0" maxOccurs="unbounded">
                                 <xs:annotation>
                                     <xs:documentation>
@@ -389,61 +356,5 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-    <!-- WRTODO: Move to ewp: namespace? -->
-    <xs:group name="nestable-text-sections">
-        <xs:sequence>
-            <xs:element name="nestable-text-section" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:annotation>
-                        <xs:documentation>
-                            A section with a title, text content *and subsections* (which allows is to
-                            contain a tree-like structure).
-
-                            Please note that this type DOES NOT allow the usage of xml:lang attribute.
-                            This means that you'll usually want to wrap it in some other element which
-                            makes use of xml:lang, so that all sections "inherit" the wrappers language.
-                        </xs:documentation>
-                    </xs:annotation>
-                    <xs:sequence>
-                        <xs:element name="section-title" minOccurs="1" maxOccurs="1" type="xs:string">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Plaintext title of this section. It should be relatively short, e.g. "Useful
-                                    links".
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="text-content" minOccurs="0" maxOccurs="1" type="ewp:MultilineString">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    The plaintext content of the section. Note, that it has the type of
-                                    ewp:MultilineString, so it may contain multiple paragraphs.
-
-                                    Usually a single section will have either text content OR subsections, but it
-                                    is also allowed to have *both* content and subsections. In the latter case,
-                                    the content is to be dispayed before the subsections.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:group ref="nestable-text-sections">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    The list of subsections of this section.
-
-                                    This schema does not put a strict limit on the depth of the created tree-like
-                                    structure, but server developers SHOULD try to keep this depth on a reasonable
-                                    level. In most cases 2 or 3 levels should be enough. Client developers MAY
-                                    "flatten" the sections which they deem to be "too deep" (for example, they may
-                                    choose to display their headers as paragraphs instead of using &lt;h4&gt; or
-                                    &lt;h5&gt; headers).
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:group>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:group>
 
 </xs:schema>
