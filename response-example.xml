@@ -48,27 +48,6 @@
         <!-- Mobility factsheet. -->
         <mobility-factsheet-url xml:lang="en">http://www.uio.no/english/studies/new-student/</mobility-factsheet-url>
         <mobility-factsheet-url xml:lang="en">http://example.com/factsheet.pdf</mobility-factsheet-url>
-        <embedded-mobility-factsheet xml:lang="en">
-            <nestable-text-section>
-                <section-title>Useful links</section-title>
-                <text-content>Multiline plaintext.</text-content>
-            </nestable-text-section>
-            <nestable-text-section>
-                <section-title>Housing</section-title>
-                <text-content>Multiline plaintext.</text-content>
-            </nestable-text-section>
-            <nestable-text-section>
-                <section-title>Section with subsections</section-title>
-                <nestable-text-section>
-                    <section-title>Subsection 1</section-title>
-                    <text-content>Multiline plaintext.</text-content>
-                </nestable-text-section>
-                <nestable-text-section>
-                    <section-title>Subsection 2</section-title>
-                    <text-content>Multiline plaintext.</text-content>
-                </nestable-text-section>
-            </nestable-text-section>
-        </embedded-mobility-factsheet>
 
         <!-- Contacts section. -->
         <contact>
@@ -98,8 +77,6 @@
                 (This field may also contain other information, which is not present in the
                 model itself, e.g. calling hours.)
             </role-description>
-            <role-id>mobility-visas</role-id>
-            <role-id>mobility-insurance</role-id>
         </contact>
 
         <!-- List of department IDs. -->
