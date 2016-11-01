@@ -85,9 +85,9 @@ Related data model entities
 
  * Inst/Org Unit
  * Coordinator
+ * HEI Contact Info
  * Person
- * Academic Year?
- * Academic Term
+ * Person Contact Info
 
 
 [develhub]: http://developers.erasmuswithoutpaper.eu/
