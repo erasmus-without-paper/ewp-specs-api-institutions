@@ -77,6 +77,8 @@
                 (This field may also contain other information, which is not present in the
                 model itself, e.g. calling hours.)
             </role-description>
+            <role-id>mobility-visas</role-id>
+            <role-id>mobility-insurance</role-id>
         </contact>
 
         <!-- List of department IDs. -->

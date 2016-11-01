@@ -240,10 +240,102 @@
                                                     should be contacted?". Client developers may, for example, display this
                                                     information in a tooltip, next to the contact name.
 
+                                                    In more technical terms: it is a denormalized, human-readable representation of
+                                                    both role-id and iia-id lists described below, but it covers much more possible
+                                                    use cases (which can be very useful when no matching role-id can be found in
+                                                    EWPs enumeration).
+
                                                     Examples:
                                                     "Responsible for handling incoming students from Spain."
                                                     "Dear students! Don't hesitate to contact me directly if..."
                                                     "Responsible for handling Interinstitutional Agreements with Norway and Sweden."
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="role-id" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    An optional list of roles assigned for this contact. This list might be used by
+                                                    the clients to filter out contacts in specific contexts. (For example, client
+                                                    developer will be able to display for the student the proper contact details of
+                                                    a coordinator responsible for his particular mobility.)
+
+                                                    Server developers SHOULD NOT assign role IDs "forcefully". If the description
+                                                    of the role doesn't *really* match the true role of this contact, then it's
+                                                    better to *not* assign it. Provide a better role-description instead.
+
+                                                    Client developers MUST be prepared for this list to be expanded in the future.
+                                                    (Probably you should simply ignore unknown enumeration values.)
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration value="mobility-course-catalogue">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                This person (or office) may be contacted in regard to the content of the Course
+                                                                Catalogue (its courses and programmes).
+
+                                                                For example, client developers may display this contact next to a description
+                                                                of a course.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="mobility-housing">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                A person (or office) responsible for housing new incoming students.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="mobility-insurance">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                A person (or office) responsible for advising incoming students in regard to
+                                                                insurance.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="mobility-visas">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                A person (or office) responsible for advising incoming students in regard to
+                                                                visas.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="mobility-iias">
+                                                        <!--
+                                                        WRTODO: Not sure if this once is really needed, discuss here:
+                                                        https://github.com/erasmus-without-paper/ewp-wp3-data-model/issues/5
+                                                        -->
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                A contact in charge of IIAs.
+
+                                                                If this role is used without any iia-id elements present below, then this
+                                                                contact is responsible for *all* IIAs (which have no other assigned contact of
+                                                                their own). If there are specific IIA IDs listed below, then this contact is
+                                                                responsible for the mentioned IIAs only.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="iia-id" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+                                            <!--
+                                            WRTODO: Not sure if this once is really needed, discuss here:
+                                            https://github.com/erasmus-without-paper/ewp-wp3-data-model/issues/5
+                                            -->
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    A list of IDs of Interinstitutional Agreements this contact is responsible for
+                                                    handling.
+
+                                                    This is the place where you can assign coordinators to particular IIAs, as
+                                                    discussed here:
+                                                    https://github.com/erasmus-without-paper/ewp-wp3-data-model/issues/5#issuecomment-255537764
                                                 </xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
