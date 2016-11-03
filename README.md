@@ -87,7 +87,6 @@ Related data model entities
  * Coordinator
  * HEI Contact Info
  * Person
- * Person Contact Info
 
 
 [develhub]: http://developers.erasmuswithoutpaper.eu/
