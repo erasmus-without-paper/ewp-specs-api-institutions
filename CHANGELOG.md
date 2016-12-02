@@ -5,6 +5,15 @@ This document describes all the changes made to the *Institutions API*
 document, starting from its first beta draft version.
 
 
+0.3.0
+-----
+
+* Moved `<contact>` element to a namespace of its own (see [Abstract Contact
+  data type](https://github.com/erasmus-without-paper/ewp-specs-types-contact)).
+* Renamed `<unit-id>` to `<ounit-id>` (since Organizational Units API now uses
+  this new abbreviation, after being officially renamed from Departments API).
+
+
 0.2.0
 -----
 
