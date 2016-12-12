@@ -101,6 +101,15 @@
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <xs:element name="country" minOccurs="0" maxOccurs="1" type="ewp:CountryCode">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        The primary country of this institution. If this institution spans multiple
+                                        countries, and none of them can be considered "primary", then this element
+                                        should be skipped.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                             <xs:element ref="a:street-address" minOccurs="0" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation>

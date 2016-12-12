@@ -28,6 +28,7 @@
         <!-- Primary attributes (name, website, logo, etc.) -->
         <name xml:lang="en">University of Oslo</name>
         <name xml:lang="no">Universitetet i Oslo</name>
+        <country>NO</country>
         <a:street-address>
             <a:addressLine>University of Oslo</a:addressLine>
             <a:locality>Oslo</a:locality>
