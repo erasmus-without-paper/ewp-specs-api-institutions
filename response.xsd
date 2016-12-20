@@ -101,15 +101,6 @@
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="country" minOccurs="0" maxOccurs="1" type="ewp:CountryCode">
-                                <xs:annotation>
-                                    <xs:documentation>
-                                        The primary country of this institution. If this institution spans multiple
-                                        countries, and none of them can be considered "primary", then this element
-                                        should be skipped.
-                                    </xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
                             <xs:element ref="a:street-address" minOccurs="0" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation>
@@ -118,8 +109,11 @@
                                         This is the address which should work when, for example, the user pastes it
                                         into Google Maps. If this HEI has many campuses, then this address should refer
                                         to a "main" campus. If this HEI doesn't have a "main" campus, then the address
-                                        may be either skipped, or limited to the name of the institution, a city, and a
-                                        country.
+                                        should simply contain the name of the institution, a city, and a country. In
+                                        extreme cases, even a single country entry is better than nothing. Also see
+                                        a related discussion here:
+
+                                        https://github.com/erasmus-without-paper/ewp-specs-api-ounits/issues/2#issuecomment-266775582
 
                                         This is the primary address. Note, that more addresses may be provided by using
                                         the "contact" element.
