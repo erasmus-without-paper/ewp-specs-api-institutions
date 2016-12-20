@@ -5,6 +5,14 @@ This document describes all the changes made to the *Institutions API*
 document, starting from its first beta draft version.
 
 
+0.4.0
+-----
+
+* Added the `<root-ounit-id>` element.
+* Explained in some more detail *which* `<ounit-id>` values should be included
+  in the response.
+
+
 0.3.0
 -----
 
