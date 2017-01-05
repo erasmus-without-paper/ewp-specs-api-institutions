@@ -162,8 +162,9 @@
                                     <xs:documentation>
                                         This URL is the most important one for the incoming students (much more
                                         important than website-url above). Server developers SHOULD provide it (and
-                                        keep it updated). The URL SHOULD be publicly accessible (as opposed to being
-                                        accessible for EWP Network requesters only).
+                                        keep it updated). This URL MUST be publicly accessible to all requests made
+                                        directly from students' browsers (as opposed to being accessible for EWP
+                                        requesters only).
 
                                         It SHOULD refer to either a PDF file, or a HTML website, or both (via two
                                         separate factsheet-url elements). Other formats are also permitted, but
