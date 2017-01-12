@@ -5,6 +5,18 @@ This document describes all the changes made to the *Institutions API*
 document, starting from its first beta draft version.
 
 
+0.5.0
+-----
+
+* Up to now, Institutions API described only the HEIs *covered* by the host.
+  Now, servers are REQUIRED to also describe all HEIs which they *refer to* in
+  other APIs ([why?]
+  (https://github.com/erasmus-without-paper/ewp-specs-api-iias/issues/6)).
+
+* Added a clear requirement that the URL used in `<mobility-factsheet-url>`
+  must be publicly accessible.
+
+
 0.4.0
 -----
 
