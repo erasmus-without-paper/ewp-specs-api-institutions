@@ -87,17 +87,22 @@
                             <xs:element name="other-id" minOccurs="0" maxOccurs="unbounded" type="r:OtherHeiId">
                                 <xs:annotation>
                                     <xs:documentation>
-                                        A collection of other HEI IDs. It is recommended for this set to be exactly
-                                        the same as the one provided to the Registry Service (via the manifest file).
+                                        A collection of other HEI IDs.
+
+                                        If this HEI is covered by the server, then it is recommended for this set to be
+                                        exactly the same as the one provided to the Registry Service (via the manifest
+                                        file).
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
                             <xs:element name="name" minOccurs="1" maxOccurs="unbounded" type="ewp:StringWithOptionalLang">
                                 <xs:annotation>
                                     <xs:documentation>
-                                        A collection of institution names, in different languages. It is recommended for
-                                        this set to be exactly the same as the one provided to the Registry Service (via
-                                        the manifest file).
+                                        A collection of institution names, in different languages.
+
+                                        If this HEI is covered by the server, then it is recommended for this set to be
+                                        exactly the same as the one provided to the Registry Service (via the manifest
+                                        file).
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
