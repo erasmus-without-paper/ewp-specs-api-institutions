@@ -5,6 +5,13 @@ This document describes all the changes made to the *Institutions API*
 document, starting from its first beta draft version.
 
 
+0.6.0
+-----
+
+* An optional `<abbreviation>` element wad added. See [this thread]
+  (https://github.com/erasmus-without-paper/ewp-specs-api-institutions/issues/10).
+
+
 0.5.0
 -----
 
