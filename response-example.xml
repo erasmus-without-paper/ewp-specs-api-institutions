@@ -59,7 +59,13 @@
         </c:contact>
         <c:contact>
             <!-- More detailed example. -->
-            <c:contact-name>John Doe</c:contact-name>
+            <c:contact-name xml:lang="en">Ivan Sidorov (visas and insurance)</c:contact-name>
+            <c:contact-name xml:lang="ru-Latn">Ivan Petrovich Sidorov (vizy i strakhovaniye)</c:contact-name>
+            <c:contact-name xml:lang="ru-Cyrl">Иван Петрович Сидоров (визы и страхование)</c:contact-name>
+            <c:person-given-names xml:lang="ru-Latn">Ivan Petrovich</c:person-given-names>
+            <c:person-given-names xml:lang="ru-Cyrl">Иван Петрович</c:person-given-names>
+            <c:person-family-name xml:lang="ru-Latn">Sidorov</c:person-family-name>
+            <c:person-family-name xml:lang="ru-Cyrl">Сидоров</c:person-family-name>
             <p:phone-number>
                 <p:e164>+4723456789</p:e164>
             </p:phone-number>
@@ -70,11 +76,11 @@
             <p:fax-number>
                 <p:other-format>(23) 456789</p:other-format> <!-- discouraged -->
             </p:fax-number>
-            <c:email>john@uio.no</c:email>
+            <c:email>ivan@uio.no</c:email>
             <a:street-address> <!-- As described before. --> </a:street-address>
             <a:mailing-address> <!-- As described before. --> </a:mailing-address>
             <c:role-description xml:lang="en">
-                John Doe is advising incoming students in regard to visas and insurance.
+                Ivan Sidorov is advising incoming students in regard to visas and insurance.
 
                 (This field may also contain other information, which is not present in the
                 model itself, e.g. calling hours.)
