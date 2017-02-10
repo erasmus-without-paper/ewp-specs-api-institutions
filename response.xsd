@@ -76,7 +76,7 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="hei-id" type="xs:string">
+                            <xs:element name="hei-id" type="xs:string" minOccurs="1" maxOccurs="1">
                                 <xs:annotation>
                                     <xs:documentation>
                                         The SCHAC identifier of this HEI.
