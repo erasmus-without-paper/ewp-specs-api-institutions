@@ -217,7 +217,7 @@
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="root-ounit-id" minOccurs="0" maxOccurs="1" type="xs:string">
+                            <xs:element name="root-ounit-id" minOccurs="0" maxOccurs="1" type="ewp:AsciiPrintableIdentifier">
                                 <xs:annotation>
                                     <xs:documentation>
                                         If this HEI implements Organizational Units API in a tree-like format, then
@@ -230,7 +230,7 @@
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="ounit-id" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+                            <xs:element name="ounit-id" minOccurs="0" maxOccurs="unbounded" type="ewp:AsciiPrintableIdentifier">
                                 <xs:annotation>
                                     <xs:documentation>
                                         A list of IDs of all significant organizational units. Clients can fetch more
