@@ -3,7 +3,7 @@
     xmlns:a="https://github.com/erasmus-without-paper/ewp-specs-types-address/tree/master"
     xmlns:c="https://github.com/erasmus-without-paper/ewp-specs-types-contact/tree/master"
     xmlns:p="https://github.com/erasmus-without-paper/ewp-specs-types-phonenumber/tree/stable-v1"
-    xmlns:trm="https://github.com/erasmus-without-paper/ewp-specs-types-academic-term/tree/master"
+    xmlns:trm="https://github.com/erasmus-without-paper/ewp-specs-types-academic-term/tree/stable-v1"
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
