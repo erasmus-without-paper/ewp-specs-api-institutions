@@ -5,6 +5,34 @@ This document describes all the changes made to the *Institutions API*
 document, starting from its first beta draft version.
 
 
+1.0.0
+-----
+
+* Changed XML Namespace. Replaced the draft `master` branch:
+
+  ```
+  https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/master
+  ```
+
+  With the `stable-v1` one:
+
+  ```
+  https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/stable-v1
+  ```
+
+* Changed XML Namespaces of the Phone Number, Academic Term, Address and
+  Abstract Contact data types (all of them are now `stable-v1`).
+
+* `minOccurs` and `maxOccurs` are now provided explicitly ([why?]
+  (https://github.com/erasmus-without-paper/general-issues/issues/22)).
+
+* Organizational Unit IDs are now of `ewp:AsciiPrintableIdentifier` type
+  ([why?](https://github.com/erasmus-without-paper/general-issues/issues/23)).
+
+This is the first official stable version, accepted by all the partners
+([details here](https://github.com/erasmus-without-paper/general-issues/issues/24)).
+
+
 0.6.1
 -----
 
