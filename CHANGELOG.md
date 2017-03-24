@@ -23,8 +23,8 @@ document, starting from its first beta draft version.
 * Changed XML Namespaces of the Phone Number, Academic Term, Address and
   Abstract Contact data types (all of them are now `stable-v1`).
 
-* `minOccurs` and `maxOccurs` are now provided explicitly ([why?]
-  (https://github.com/erasmus-without-paper/general-issues/issues/22)).
+* `minOccurs` and `maxOccurs` are now provided explicitly
+  ([why?](https://github.com/erasmus-without-paper/general-issues/issues/22)).
 
 * Organizational Unit IDs are now of `ewp:AsciiPrintableIdentifier` type
   ([why?](https://github.com/erasmus-without-paper/general-issues/issues/23)).
@@ -43,8 +43,8 @@ This is the first official stable version, accepted by all the partners
 0.6.0
 -----
 
-* An optional `<abbreviation>` element wad added. See [this thread]
-  (https://github.com/erasmus-without-paper/ewp-specs-api-institutions/issues/10).
+* An optional `<abbreviation>` element wad added. See
+  [this thread](https://github.com/erasmus-without-paper/ewp-specs-api-institutions/issues/10).
 
 
 0.5.0
@@ -52,8 +52,8 @@ This is the first official stable version, accepted by all the partners
 
 * Up to now, Institutions API described only the HEIs *covered* by the host.
   Now, servers are REQUIRED to also describe all HEIs which they *refer to* in
-  other APIs ([why?]
-  (https://github.com/erasmus-without-paper/ewp-specs-api-iias/issues/6)).
+  other APIs
+  ([why?](https://github.com/erasmus-without-paper/ewp-specs-api-iias/issues/6)).
 
 * Added a clear requirement that the URL used in `<mobility-factsheet-url>`
   must be publicly accessible.

@@ -21,8 +21,8 @@ includes things like address, logo image and key contact persons.
 
 Initially, this API was supposed to work *only* with `hei_id`s **covered** by
 the server's EWP Host. In other words, implementers were required to return
-information only on "their own" HEIs. Later, however, [it turned out]
-(https://github.com/erasmus-without-paper/ewp-specs-api-iias/issues/6) that in
+information only on "their own" HEIs. Later, however,
+[it turned out](https://github.com/erasmus-without-paper/ewp-specs-api-iias/issues/6) that in
 some cases, it would also be very useful if the server could provide some
 (very basic) information on **other known HEIs** too.
 
@@ -95,8 +95,8 @@ Handling of invalid parameters
 Response
 --------
 
-Servers MUST respond with a valid XML document described by the [response.xsd]
-(response.xsd) schema. See the schema annotations for further information.
+Servers MUST respond with a valid XML document described by the
+[response.xsd](response.xsd) schema. See the schema annotations for further information.
 
 
 Related data model entities
