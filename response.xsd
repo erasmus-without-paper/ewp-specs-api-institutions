@@ -154,6 +154,11 @@
                                 <xs:annotation>
                                     <xs:documentation>
                                         Primary website of the institution.
+
+                                        The xml:lang attribute, if given, SHOULD represent the language of this page.
+                                        Multiple URLs can be provided (with different xml:lang values). It is also
+                                        perfectly okay to provide a single URL which dynamically detects the viewer's
+                                        language preferences (in this case, no xml:lang attribute should be given).
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
