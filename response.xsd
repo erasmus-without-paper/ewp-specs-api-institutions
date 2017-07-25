@@ -10,8 +10,8 @@
     xmlns:trm="https://github.com/erasmus-without-paper/ewp-specs-types-academic-term/tree/stable-v1"
     elementFormDefault="qualified"
 
-    targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/stable-v1"
-    xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/stable-v1"
+    targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/stable-v2"
+    xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-institutions/tree/stable-v2"
 >
     <xs:import
         schemaLocation="https://raw.githubusercontent.com/erasmus-without-paper/ewp-specs-architecture/stable-v1/common-types.xsd"

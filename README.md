@@ -70,8 +70,16 @@ which they refer to in other EWP APIs.
 Security
 --------
 
-For all endpoints of this API, implementers MUST follow the rules described in
-[EWP Authentication and Security, Version 1][sec-v1] document.
+This version of this API uses [standard EWP Authentication and Security,
+Version 2][sec-v2]. Server implementers choose which security methods they
+support by declaring them in their Manifest API entry.
+
+This API provides data which is also usually accessible to the anonymous public
+by other channels. It is RECOMMENDED for server implementers to not be overly
+strict on security methods they require (i.e. it is RECOMMENDED to *not*
+require extra layers of encryption in requests and responses - TLS seems more
+than enough). Server implementers MAY also consider allowing this API to be
+accessed by [anonymous clients][cliauth-none].
 
 
 Handling of invalid parameters
@@ -112,4 +120,5 @@ Related data model entities
 [discovery-api]: https://github.com/erasmus-without-paper/ewp-specs-api-discovery
 [echo]: https://github.com/erasmus-without-paper/ewp-specs-api-echo
 [error-handling]: https://github.com/erasmus-without-paper/ewp-specs-architecture#error-handling
-[sec-v1]: https://github.com/erasmus-without-paper/ewp-specs-sec-intro/tree/stable-v1
+[sec-v2]: https://github.com/erasmus-without-paper/ewp-specs-sec-intro/tree/stable-v2
+[cliauth-none]: https://github.com/erasmus-without-paper/ewp-specs-sec-cliauth-none
