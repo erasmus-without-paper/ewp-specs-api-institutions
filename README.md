@@ -8,6 +8,9 @@ Institutions API
 Summary
 -------
 
+**This version (v1.x.x) of Institutions API is now DEPRECATED. Please upgrade
+to version 2.x.x.**
+
 This document describes the **Institutions API**. Once implemented by the host,
 it allows external clients to retrieve general information on institutions
 **either covered, or otherwise known**, by this host. This information
