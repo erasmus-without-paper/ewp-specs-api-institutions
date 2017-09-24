@@ -26,10 +26,10 @@ out](https://github.com/erasmus-without-paper/ewp-specs-api-iias/issues/6) that
 in some cases, it would also be very useful if the server could provide some
 (very basic) information on **other known HEIs** too.
 
-Currently, server implementers MUST be able to provide some basic information
-on all such institutions which they **refer to** (by their SCHAC IDs) in other
-EWP APIs. It doesn't have to be much information though - most often, just the
-name will be enough!
+Therefore, it is now RECOMMENDED for server implementers to also provide some
+basic information on all external institutions which they **refer to** (by
+their SCHAC IDs) in other EWP APIs. It doesn't have to be much information
+though (most often, just the name will be enough).
 
 
 Request method
