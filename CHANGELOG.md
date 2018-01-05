@@ -5,6 +5,16 @@ This document describes all the changes made to the *Institutions API*
 document, starting from its first beta draft version.
 
 
+2.1.0
+-----
+
+* Publishing data on external HEIs is now only "recommended" (previously it
+  was "required").
+
+* Updated `response-example.xml`: Replaced the deprecated `euc` other-id type
+  with `erasmus-charter`.
+
+
 2.0.0
 -----
 
