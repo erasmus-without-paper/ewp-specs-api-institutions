@@ -4,6 +4,11 @@ Release notes
 This document describes all the changes made to the *Institutions API*
 document, starting from its first beta draft version.
 
+2.2.0
+-----
+
+* Added optional field for the URL pointing to the institution's course catalogue.
+
 
 2.1.0
 -----
